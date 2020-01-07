@@ -16,7 +16,7 @@ cleanup() {
 if [ "$SOLIDITY_COVERAGE" = true ]; then
   ganache_port=8555
 else
-  ganache_port=8546
+  ganache_port=8545
 fi
 
 ganache_running() {
@@ -76,14 +76,6 @@ else
   start_ganache
 fi
 
-node_modules/@nomiclabs/buidler/internal/cli/cli.js --verbose --show-stack-traces --version
-
 setup_relayhub
 
-if [ "$SOLIDITY_COVERAGE" = true ]; then
-  npx solidity-coverage
-else
-  node node_modules/@nomiclabs/buidler/internal/cli/cli.js --network develop --verbose --show-stack-traces test "$@"
-fi
-
-
+wait $ganache_pid

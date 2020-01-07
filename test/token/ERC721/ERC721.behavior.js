@@ -317,7 +317,7 @@ function shouldBehaveLikeERC721 (
         describe('to a contract that does not implement the required function', function () {
           it('reverts', async function () {
             const invalidReceiver = this.token;
-            await expectRevert.unspecified(
+            await expectRevert(
               this.token.safeTransferFrom(owner, invalidReceiver.address, tokenId, { from: owner })
             );
           });
